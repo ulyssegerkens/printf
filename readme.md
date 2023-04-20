@@ -3,7 +3,7 @@
 </h1>
 
 ## ℹ️ General informations
-Version: 15. Bonus not included. Subject attached. </br>
+Bonus not included. Subject attached. </br>
 Basic implementation of printf. Straightforward code and as clean as possible.</br>
 
 ## 🎉 Testing
