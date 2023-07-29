@@ -6,34 +6,42 @@
 #    By: ugerkens <ugerkens@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/22 17:56:24 by ugerkens          #+#    #+#              #
-#    Updated: 2023/04/19 15:33:03 by ugerkens         ###   ########.fr        #
+#    Updated: 2023/07/27 21:04:46 by ugerkens         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= libftprintf.a
+# Variables
+NAME		= ft_printf.a
+CC			= gcc
+RM			= rm -rf
+CFLAGS		= -Wall -Wextra -Werror -Isrc -Iinclude
 
+# Paths and Files
+VPATH		= src
 SRCS		= ft_printf.c ft_print_nbr.c
 
-OBJS		= $(SRCS:.c=.o)
+OBJS		= $(addprefix obj/, $(SRCS:.c=.o))
 
-CC			= @cc
-RM			= @rm -rf
-CFLAGS		= -Wall -Wextra -Werror
+# Rules
+$(NAME):	$(OBJS)
+			ar rcs $(NAME) $(OBJS)
 
 all:		$(NAME)
 
-$(NAME):	$(OBJS)
-			@ar rcs $(NAME) $(OBJS)
+obj:
+			mkdir -p obj
 
-$(OBJS):	%.o: %.c
+obj/%.o:	%.c | obj
 			$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:
-			@$(RM) $(OBJS)
+			$(RM) obj
 
 fclean:		clean
-			@$(RM) $(NAME)
+			$(RM) $(NAME)
 
 re:			fclean all
+
+.SILENT:
 
 .PHONY:		all clean fclean re
